@@ -90,8 +90,7 @@ const AddTask = () => {
               style={{ width: "30%", minWidth: "120px" }}
               id={fieldName}
               name={fieldName}
-              label={e.label
-              }
+              label={e.label}
               value={formik.values[fieldName]}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -109,7 +108,13 @@ const AddTask = () => {
           );
         })}
 
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button
+          style={{ width: "65%", minWidth: "120px" }}
+          color="primary"
+          variant="contained"
+          fullWidth
+          type="submit"
+        >
           Submit
         </Button>
       </form>
