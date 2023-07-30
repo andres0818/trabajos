@@ -24,12 +24,14 @@ const validationSchema = yup.object({
   abono: yup
     .string("Ingrese el saldo abonado por el usuario")
     .required("Saldo requerido"),
-  fecha: yup.string("Fecha de la venta").required("FEcha de venta requerido"),
+  fecha: yup.string("Fecha de la venta").required("Fecha de venta requerido"),
   laboratorio: yup
     .string("Ingrese el nombre del laboratorio")
     .required("Nombre requerido"),
   orden: yup.string("Número de la orden").required("Número de orden requerido"),
-  entrega: yup.string("Fecha de entrega de la venta").required("Fecha requ"),
+  entrega: yup
+    .string("Fecha de entrega de la venta")
+    .required("Fecha de entrega requerida"),
 });
 
 const AddTask = () => {
@@ -61,7 +63,7 @@ const AddTask = () => {
     { id: "abono", name: "abono", label: "Abono" },
     { id: "fecha", name: "fecha", label: "Fecha de Venta" },
     { id: "laboratorio", name: "laboratorio", label: "Laboratorio" },
-    { id: "orden", name: "orden", label: "Número de orden" },
+    { id: "orden", name: "orden", label: "Número de Orden" },
     { id: "entrega", name: "entrega", label: "Fecha de Entrega" },
     { id: "observaciones", name: "observaciones", label: "Adjunte una nota" },
   ];
@@ -84,10 +86,12 @@ const AddTask = () => {
           return (
             <TextField
               key={e.id}
+              type={e.id === "fecha" || e.id === "entrega" ? "date" : "text"}
               style={{ width: "30%", minWidth: "120px" }}
               id={fieldName}
               name={fieldName}
-              label={e.label}
+              label={e.label
+              }
               value={formik.values[fieldName]}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -95,6 +99,12 @@ const AddTask = () => {
                 formik.touched[fieldName] && Boolean(formik.errors[fieldName])
               }
               helperText={formik.touched[fieldName] && formik.errors[fieldName]}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              InputProps={{
+                placeholder: "",
+              }}
             />
           );
         })}
